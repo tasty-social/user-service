@@ -11,14 +11,11 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const checkExisted = await this.findOne(createUserDto.email);
-    console.log("checkExisted", checkExisted);
     if (checkExisted) {
-      console.log("xxxxxxxxxxxxxxxxxxxxxx", checkExisted);
       throw new HttpException('Email already existed', HttpStatus.CONFLICT);
     }
 
     const hashedPassword = await this.hashPassword(createUserDto.password);
-    console.log("hashed"); 
     const createdUser = new this.userModel({
       email: createUserDto.email,
       password: hashedPassword

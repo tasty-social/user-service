@@ -22,14 +22,13 @@ export class AuthService {
   }
 
   async login(user: any) {
-    const payload = {email: user.email, sub: user._id};
+    const payload = {email: user.email, sub: user._id, roles: user.roles};
     return {
       accessToken: this.jwtService.sign(payload),
     }
   }
 
   async register(user: CreateUserDto) {
-    console.log("dbbbdb");
     return await this.usersService.create(user);
   }
 }
