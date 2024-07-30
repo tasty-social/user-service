@@ -13,7 +13,7 @@ services:
       - db
     volumes:
       - .:/usr/src/app:rw
-      # - /app/node_modules
+      - /usr/src/app/node_modules
   db:
     image: mongo:8.0.0-rc13-jammy
     ports:

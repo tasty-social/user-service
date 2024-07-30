@@ -1,18 +1,18 @@
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
-import { Observable } from "rxjs";
-import { map } from 'rxjs/operators';
-import { ResponseDto } from "./response..dto";
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common'
+import { Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
+import { ResponseDto } from './response..dto'
 
 @Injectable()
-export class TransformInterceptor<T> implements NestInterceptor<ResponseDto, any> {
+export class TransformInterceptor implements NestInterceptor<ResponseDto, any> {
   intercept(context: ExecutionContext, next: CallHandler<ResponseDto>): Observable<any> | Promise<Observable<any>> {
     return next.handle().pipe(
-      map(data => ({
+      map((data) => ({
         status: data.status || 'success',
         message: data.message || 'Request successful',
         data: data.data || data,
         timestamp: new Date().toISOString(),
-        path: data.path,
+        path: data.path
       }))
     )
   }
