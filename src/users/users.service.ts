@@ -20,7 +20,6 @@ export class UsersService {
       email: createUserDto.email,
       password: hashedPassword
     })
-    console.log('created')
     return await createdUser.save()
   }
 
